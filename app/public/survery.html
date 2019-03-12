@@ -149,7 +149,7 @@
     <br>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
+    <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit" ><i class="fa fa-check-circle" aria-hidden="true"></i>
      Submit</button>
 
     <hr>
@@ -173,7 +173,7 @@
         </div>
         <div class="modal-body">
           <h2 id="match-name"></h2>
-          <img id="match-img" width="500" src="https://www.infinityproductionsllc.com/ebay/store/prints/women_images/women_0076_ebay_listing.jpg" alt="">
+          <img id="match-img" width="500" src="" alt="">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -182,7 +182,34 @@
 
     </div>
   </div>
+  <script type="text/javascript">
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+    
+      var newFriends = {
+        name: $("#name").val().trim(),
+        photo: $("#photo").val().trim(),
+        scores: [$("#q1").val(),$("#q2").val(),$("#q3").val(),$("#q4").val(),$("#q5").val(),$("#q6").val(),$("#q7").val(),$("#q8").val(),$("#q9").val(),$("#q10").val()]
+      };
+    
+      $.post("/api/friends", newFriends)
+        .then(function(data) {
+          console.log(data);
+          $("#match-name").text(data.name);
+          $("#match-img").attr("src", data.photo);
+          // Show the modal with the best match
+          $("#results-modal").modal("toggle");
+
+        });
+        // window.location.href = "//localhost:3000/api/match"
+        // $.get("/api/match").then(function(data) {
+        //   $("#match-name").text(data.name);
+        //   $("#match-img").attr("src", data.photo);
+        //   // Show the modal with the best match
+        //   $("#results-modal").modal("toggle");
+        // });
+    });
+
+  </script>
 </body>
-
-
 </html>

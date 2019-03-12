@@ -3,6 +3,7 @@
 var express = require("express");
 var path = require("path");
 var friends = require("./app/data/friends");
+var fs = require("fs");
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -33,17 +34,43 @@ app.get("/", function(req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
     var newfriends = req.body;
-  
-    // Using a RegEx Pattern to remove spaces from newfriends
-    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    newfriends.id = newfriends.name.replace(/\s+/g, "").toLowerCase();
-  
     console.log(newfriends);
+
+   var matImage = "";
+   var matchName = "";
+   var totalDifference = 50;
+    for (let j = 0; j < friends.length; j++) {   
+      var diff =0;
+        for (let i = 0; i < newfriends.scores.length; i++) {
+          newfriends.scores[i] = parseInt(newfriends.scores[i]); 
+            diff += Math.abs(friends[j].scores[i] -  newfriends.scores[i]);
+        } 
+        
+        if (diff< totalDifference){
+            totalDifference = diff;
+            matchName = friends[j].name;
+            matImage = friends[j].photo;
+            console.log(matchName);
+            console.log("smaller number" + diff);
+        }
+    }
+
+    var profile = {
+      name: matchName,
+      photo: matImage
+    }
+    
+    // friends.push(newfriends);
   
-    friend.push(newfriends);
-  
-    res.json(newfriends);
+    res.json(profile);
+    
   });
+
+//  /// Route Match html
+// app.get('/api/match', function(req, res) {
+//   res.sendFile(path.join(__dirname, './app/public/match.html'));
+// });
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
