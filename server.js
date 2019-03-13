@@ -65,12 +65,6 @@ app.get("/", function(req, res) {
     res.json(profile);
     
   });
-
-//  /// Route Match html
-// app.get('/api/match', function(req, res) {
-//   res.sendFile(path.join(__dirname, './app/public/match.html'));
-// });
-
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
