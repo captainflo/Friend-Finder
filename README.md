@@ -4,4 +4,8 @@ In this activity, I builded a compatibility-based "FriendFinder" application -- 
 
 I use Express to handle routing. I deployed my app to Heroku so other users can fill it out.
 
+### Hosting on Heroku
+
+Now that I have a backend to my applications, I use Heroku for hosting.
+See the [the Demo on heroku](https://agile-headland-35700.herokuapp.com/).
 
