@@ -59,9 +59,6 @@ app.get("/", function(req, res) {
       name: matchName,
       photo: matImage
     }
-    
-    // friends.push(newfriends);
-  
     res.json(profile);
     
   });
